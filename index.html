@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --raspberry: #c0146c;
+      --raspberry-light: #e91e8c;
+      --grape: #7c3aed;
+      --blush: #f472b6;
+      --purple-deep: #1a0428;
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --text-primary: #fdf2f8;
+      --text-muted: rgba(253, 242, 248, 0.55);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--text-primary);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background orbs */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: min(60vw, 500px);
+      height: min(60vw, 500px);
+      background: radial-gradient(circle, rgba(192,20,108,0.45), transparent 70%);
+      top: -15%;
+      right: -10%;
+      animation: orbFloat 8s ease-in-out infinite alternate;
+    }
+    body::after {
+      width: min(55vw, 450px);
+      height: min(55vw, 450px);
+      background: radial-gradient(circle, rgba(109,40,217,0.45), transparent 70%);
+      bottom: -15%;
+      left: -10%;
+      animation: orbFloat 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes orbFloat {
+      from { transform: translateY(0) scale(1); }
+      to   { transform: translateY(40px) scale(1.1); }
+    }
+
+    /* Glass card */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 420px);
+      padding: clamp(28px, 6vw, 48px) clamp(24px, 6vw, 44px);
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow:
+        0 8px 48px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 0 0 1px rgba(192,20,108,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .container::before {
+      content: '🎂';
+      display: block;
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 4px;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(36px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Select dropdowns */
+    select {
+      width: 100%;
+      padding: 14px 18px;
+      background: #ffffff;
+      border: 1.5px solid rgba(192,20,108,0.3);
+      border-radius: 14px;
+      color: #1a0428;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(15px, 3.5vw, 17px);
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c0146c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 12px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    select:focus {
+      border-color: var(--raspberry-light);
+      box-shadow: 0 0 0 3px rgba(233,30,140,0.2);
+    }
+
+    /* Age result */
+    #age {
+      font-size: clamp(14px, 4vw, 17px);
+      font-weight: 600;
+      color: var(--blush);
+      text-align: center;
+      min-height: 24px;
+      letter-spacing: 0.02em;
+      transition: all 0.4s ease;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: clamp(13px, 3vw, 16px);
+      background: linear-gradient(135deg, var(--raspberry) 0%, var(--grape) 100%);
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(192,20,108,0.45);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(192,20,108,0.55);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 360px) {
+      .container { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+   <div class="container">
+    <select name="Birth" id="birth-year">Birth Year</select>
+    <select name="currentyear" id="current-year">Current Year</select>
+    <div class="" id="age"></div>
+    <button onclick="ageGuesser()">Enter</button>
+   </div>
+<script>
+ let currentyear = document.getElementById("current-year")
+ let birthyear = document.getElementById("birth-year")
+ let age_box = document.getElementById("age")
+ let btn =document.getElementsByTagName("button")
+
+ 
+ for (let i = 1960; i <= 2026; i++) {
+ let option = document.createElement("option");//  1 element 2 value ko assign nhi kya jasakta
+//  option.value = i;
+ option.textContent = i;
+
+
+ birthyear.appendChild(option)
+ let option2 = document.createElement("option");// while creating dom element usy number ma covert karna useless ha dom ka elemnt ko
+//  option2.value = i;
+ option2.textContent = i;
+currentyear.appendChild(option2) 
+  
+ }
+
+ function ageGuesser() {
+  let birth = Number(birthyear.value)
+  let Current = Number(currentyear.value)
+  let age = Current - birth
+ if (age>=40) {
+    
+    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a senior citizen`
+  }
+  else if (age>=18) {
+    
+    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a Adult`
+  }
+  else {
+    
+    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a Child`
+  }
+  console.log(age);
+  
+
+ }
+</script>
+</body>
+</html>
