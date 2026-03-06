@@ -160,7 +160,10 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(192,20,108,0.55);
     }
-
+label{
+  color: #1a0428;
+      font-size: clamp(13px, 3.5vw, 15px);
+}
     button:active {
       transform: translateY(0);
     }
@@ -172,10 +175,12 @@
 </head>
 <body>
    <div class="container">
+    <label for="birth-year">Enter your birth year</label>
     <select name="Birth" id="birth-year">Birth Year</select>
+    <label for="currentyear">Enter current year</label>
     <select name="currentyear" id="current-year">Current Year</select>
     <div class="" id="age"></div>
-    <button onclick="ageGuesser()">Enter</button>
+    <button onclick="ageGuesser()">Generate</button>
    </div>
 <script>
  let currentyear = document.getElementById("current-year")
@@ -204,15 +209,15 @@ currentyear.appendChild(option2)
   let age = Current - birth
  if (age>=40) {
     
-    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a senior citizen`
+    age_box.innerHTML = ` your Current age is "${age}" or "${++age}" you are a senior citizen`
   }
   else if (age>=18) {
     
-    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a Adult`
+    age_box.innerHTML = ` your Current age is "${age}" or "${++age}" you are a Adult`
   }
   else {
     
-    age_box.innerHTML = ` your Current age is ${age} or ${++age} you are a Child`
+    age_box.innerHTML = ` your Current age is "${age}" or "${++age}" you are a Child`
   }
   console.log(age);
   
